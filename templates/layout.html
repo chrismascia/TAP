@@ -13,15 +13,18 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
     <!--<link href="{{ url_for('static', filename='vendor/metisMenu/metisMenu.min.css') }}" rel="stylesheet">-->
 
-    <!-- Custom CSS -->
+    <!-- sb-admin CSS -->
    <link href="{{ url_for('static', filename='dist/css/sb-admin-2.css') }}" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <!--<link href="{{ url_for('static', filename='vendor/morrisjs/morris.css') }}" rel="stylesheet">-->
+    <link href="{{ url_for('static', filename='vendor/morrisjs/morris.css') }}" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="{{ url_for('static', filename='vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
@@ -48,8 +51,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Test Automation Portal</a>
+                <a class="navbar-brand" href="/"><span class="blue-text">T</span>est <span class="blue-text">A</span>utomation <span class="blue-text">P</span>ortal</a>
+                
             </div>
+            
             <!-- /.navbar-header -->
 
             
@@ -78,16 +83,10 @@
                                     <a href="/applications/19">GBL</a>
                                 </li>
                                 <li>
-                                    <a href="#">CRM</a>
+                                    <a href="/applications/22">API Management</a>
                                 </li>
                                 <li>
-                                    <a href="#">Facets</a>
-                                </li>
-                                <li>
-                                    <a href="#">BCBSWNY Website</a>
-                                </li>
-                                 <li>
-                                    <a href="#">BSNENY Website</a>
+                                    <a href="/applications/45">BCBSWNY Website</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -119,9 +118,9 @@
     <script src="{{ url_for('static', filename='vendor/metisMenu/metisMenu.min.js') }}"></script>
 
     <!-- Morris Charts JavaScript -->
-   <!-- <script src="{{ url_for('static', filename='vendor/raphael/raphael.min.js') }}"></script>
+   <script src="{{ url_for('static', filename='vendor/raphael/raphael.min.js') }}"></script>
     <script src="{{ url_for('static', filename='vendor/morrisjs/morris.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='data/morris-data.js') }}"></script>-->
+    <script src="{{ url_for('static', filename='data/morris-data.js') }}"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="{{ url_for('static', filename='dist/js/sb-admin-2.js') }}"></script>

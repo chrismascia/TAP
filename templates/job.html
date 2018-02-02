@@ -10,25 +10,27 @@
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-primary">
+                    <div class="panel {% if jobData.status == 'passed' %}panel-green {% elif jobData.status == 'running' %} panel-yellow {%else%}panel-red {%endif%}">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-cogs fa-5x"></i>
+                                    <i class="fa {% if jobData.status == 'passed' %}fa-thumbs-up {% elif jobData.status == 'running' %} fa-hourglass-half {%else%}fa-thumbs-down {%endif%}  fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">{{numberOfRuns}}</div>
-                                    <div>Test Runs</div>
+                                    <div class="huge">{{jobData.status}}</div>
+                                    <div>Last Run Status</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        {% if testCaseCount > 0 %}
+                         <a href="#">
                             <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
+                                <span class="pull-left"><a href="/applications/{{projectData.id}}/job/{{jobData.id}}/details">Test Details</a></span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
                         </a>
+                        {% endif %}
                     </div>
                 </div>
                  <div class="col-lg-3 col-md-6">
@@ -39,18 +41,11 @@
                                     <i class="fa fa-check-square-o fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">531</div>
+                                    <div class="huge">{{testCaseCount}}</div>
                                     <div>Test Cases</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -61,22 +56,15 @@
                                     <i class="fa fa-thumbs-o-up fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">92%</div>
+                                    <div class="huge"></div>
                                     <div>Pass Rate</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
                     </div>
                 </div>
                
-                <div class="col-lg-3 col-md-6">
+               <!-- <div class="col-lg-3 col-md-6">
                     <div class="panel panel-red">
                         <div class="panel-heading">
                             <div class="row">
@@ -97,7 +85,7 @@
                             </div>
                         </a>
                     </div>
-                </div>
+                </div>-->
             </div>
             <!-- /.row -->
             <div class="row">
@@ -111,28 +99,30 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-12">
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-hover table-striped">
                                             <thead>
                                                 
                                                 <tr>
-                                                    <th>Job #</th>
-                                                    <th>Date</th>
-                                                    <th>Status</th>
-                                                    <th>Artifacts</th>
+                                                    <th>Test Suite Name</th>
+                                                    <th>Test Cases Passed</th>
+                                                    <th>Test Cases Failed</th>
+                                                    <!--<th>Pass Percentage</th>-->
                                                 </tr>
                                                 
                                             </thead>
                                             <tbody>
-                                                {% for job in projectJobsData %}
+                                                {%if testCaseCount > 0%}
+                                                {% for suiteStat in outputXMLData["robot"]["statistics"]["suite"]["stat"] %}
                                                 <tr>
-                                                    <td>{{job.id}}</td>
-                                                    <td>{{job.created_at}}</td>
-                                                    <td>{{job.status}}</td>
-                                                    <td><a href="/applications/{{projectData.name}}">Test Details</a></td>
+                                                    <td>{{suiteStat["@name"]}}</td>
+                                                    <td>{{suiteStat["@pass"]}}</td>
+                                                    <td>{{suiteStat["@fail"]}}</td>
+                                                    <!--<td><a href="/applications/{{projectData.id}}/job/{{jobData.id}}/details">Test Details</a></td>-->
                                                 </tr>
-                                                {% endfor %}                                                
+                                                {% endfor %}
+                                                {%endif%}
                                             </tbody>
                                         </table>
                                     </div>
