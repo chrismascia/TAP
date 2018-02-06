@@ -2,3 +2,11 @@
     color: #337ab7;
     font-weight: bold;
 }
+
+.donut-chart{
+  height:250px;
+}
+
+.view-results-link{
+    font-size: 8px;
+}

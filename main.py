@@ -64,6 +64,10 @@ def show_job(application_id, job_id):
     
     print "printing!"
     
+    #get job trace
+    traceURL = "http://gitlab.healthnow.org/api/v4/projects/"+str(application_id)+"/jobs/"+str(job_id)+"/trace?private_token=6Qg85yGzGV_hGCyLxWts";
+    traceHTML = urllib2.urlopen(traceURL).read()
+    
     #get test output.xml
     outputXMLURL = "http://gitlab.healthnow.org/api/v4/projects/"+str(application_id)+"/jobs/"+str(job_id)+"/artifacts/artifacts/output.xml"
     outputXMLRequest = Request(outputXMLURL)
@@ -77,15 +81,20 @@ def show_job(application_id, job_id):
     except IOError, e:
         outputXMLData = ""
         testCaseCount = 0
+        
+        
            
-    return render_template('job.html', outputXMLData=outputXMLData, jobData=jobData, projectData=projectData, testCaseCount=testCaseCount)
+    return render_template('job.html', outputXMLData=outputXMLData, jobData=jobData, projectData=projectData, testCaseCount=testCaseCount, traceHTML=traceHTML)
 
 @app.route('/applications/<int:application_id>/job/<int:job_id>/details')
 def show_report(application_id, job_id):
-    reportURL = "http://gitlab.healthnow.org/api/v4/projects/"+str(application_id)+"/jobs/"+str(job_id)+"/artifacts/artifacts/log.html"
-    reportRequest = Request(reportURL)
-    reportRequest.add_header('PRIVATE-TOKEN', '6Qg85yGzGV_hGCyLxWts')
-    reportHTML = urllib2.urlopen(reportRequest).read()
-    reportHTML = reportHTML.replace("selenium-screenshot-", "http://gitlab.healthnow.org/api/v4/projects/"+str(application_id)+"/jobs/"+str(job_id)+"/artifacts/artifacts/selenium-screenshot-");
-    
-    return reportHTML
+    try:
+        reportURL = "http://gitlab.healthnow.org/api/v4/projects/"+str(application_id)+"/jobs/"+str(job_id)+"/artifacts/artifacts/log.html"
+        reportRequest = Request(reportURL)
+        reportRequest.add_header('PRIVATE-TOKEN', '6Qg85yGzGV_hGCyLxWts')
+        reportHTML = urllib2.urlopen(reportRequest).read()
+        reportHTML = reportHTML.replace("selenium-screenshot-", "http://gitlab.healthnow.org/api/v4/projects/"+str(application_id)+"/jobs/"+str(job_id)+"/artifacts/artifacts/selenium-screenshot-");
+        return reportHTML
+    except IOError, e:
+        return render_template('index.html') 
+

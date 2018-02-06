@@ -18,7 +18,7 @@
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <!--<link href="{{ url_for('static', filename='vendor/metisMenu/metisMenu.min.css') }}" rel="stylesheet">-->
+    <link href="{{ url_for('static', filename='vendor/metisMenu/metisMenu.min.css') }}" rel="stylesheet">
 
     <!-- sb-admin CSS -->
    <link href="{{ url_for('static', filename='dist/css/sb-admin-2.css') }}" rel="stylesheet">
@@ -120,11 +120,12 @@
     <!-- Morris Charts JavaScript -->
    <script src="{{ url_for('static', filename='vendor/raphael/raphael.min.js') }}"></script>
     <script src="{{ url_for('static', filename='vendor/morrisjs/morris.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='data/morris-data.js') }}"></script>
+    <!--<script src="{{ url_for('static', filename='data/morris-data.js') }}"></script>-->
 
     <!-- Custom Theme JavaScript -->
     <script src="{{ url_for('static', filename='dist/js/sb-admin-2.js') }}"></script>
-
+    {% block scripts %}
+    {% endblock %}
 </body>
 
 </html>

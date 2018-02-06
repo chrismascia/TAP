@@ -61,11 +61,16 @@
                                     <i class="fa {% if projectJobsData[0]['status'] == 'passed' %}fa-thumbs-up {% elif projectJobsData[0]['status'] == 'running' %} fa-hourglass-half {%else%}fa-thumbs-down {%endif%}  fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
+                                    {% if testCaseCount > 0%}
                                     <div class="huge">{{projectJobsData[0]['status']}}</div>
+                                    {% else %}
+                                    <div class="huge">error</div>
+                                    {% endif %}
                                     <div>Last Run Status</div>
                                 </div>
                             </div>
                         </div>
+                        {% if testCaseCount > 0%}
                          <a href="#">
                             <div class="panel-footer">
                                 <span class="pull-left"><a href="/applications/{{projectData.id}}/job/{{projectJobsData[0]['id']}}/details">Test Details</a></span>
@@ -73,6 +78,7 @@
                                 <div class="clearfix"></div>
                             </div>
                         </a>
+                        {% endif %}
                     </div>
                 </div>
                
