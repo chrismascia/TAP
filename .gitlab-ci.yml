@@ -1,0 +1,29 @@
+before_script:
+  - echo "Before script"
+  - echo $CI_BUILD_REF
+  - echo $CI_PROJECT_DIR
+  - echo $CI_COMMIT_TAG
+
+stages:
+  - start-flask-app
+
+start-flasck-app-job:
+  stage: start-flask-app
+  image: jcdemo/flaskapp
+  script:
+    - echo "Starting flask app"
+    - pwd
+    - ls -R
+    - mkdir -p /src
+    - cp -a /. /src
+    - ls -R
+    #- pip install flask
+    - pip install urllib2
+    - pip install xmltodict
+    - pip install json
+    - cd /src
+    - export FLASK_APP=main.py
+    - flask run
+    
+  tags:
+    - docker-linux
