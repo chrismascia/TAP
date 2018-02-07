@@ -2,9 +2,7 @@
 FROM python:2.7-alpine 
 
 RUN pip install flask ; \
-    pip install urllib2 ; \
-    pip install xmltodict ; \
-    pip install json
+    pip install xmltodict
 
 COPY app.py /app/
 COPY static /app/
