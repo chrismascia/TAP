@@ -6,7 +6,7 @@ RUN pip install flask ; \
 
 COPY app.py /app/
 COPY static /app/
-COPY template /app/
+COPY templates /app/
 
 EXPOSE 5000
 
