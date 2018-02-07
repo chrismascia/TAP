@@ -12,7 +12,7 @@ build-job:
   stage: build
   script:
     - docker info
-    - docker build -t healthnow/test-automation-portal:$CI_BUILD_REF .
+    - docker build -t healthnow/test-automation-portal .
   only:
     - master
   tags:
@@ -22,7 +22,7 @@ tag-job:
   stage: tag
   script:
     - docker images
-    - docker tag healthnow/test-automation-portal:$CI_BUILD_REF  $DOCKER_REGISTRY/healthnow/test-automation-portal:$CI_BUILD_REF 
+    - docker tag healthnow/test-automation-portal  $DOCKER_REGISTRY/healthnow/test-automation-portal 
     - docker images
   only:
     - master
@@ -33,7 +33,7 @@ push-job:
   stage: push
   script:
     - docker images
-    - docker push $DOCKER_REGISTRY/healthnow/test-automation-portal:$CI_BUILD_REF 
+    - docker push $DOCKER_REGISTRY/healthnow/test-automation-portal
   only:
     - master
   tags:
