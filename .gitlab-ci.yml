@@ -17,12 +17,12 @@ start-flasck-app-job:
     - mkdir -p /src
     - cp -a /. /src
     - ls -R
-    #- pip install flask
     - pip install urllib2
     - pip install xmltodict
     - pip install json
     - cd /src
-    - export FLASK_APP=main.py
+    - flask stop
+    - export FLASK_APP=app.py
     - flask run
     
   tags:
