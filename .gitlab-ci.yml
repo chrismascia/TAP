@@ -15,7 +15,9 @@ start-job:
     - pwd
     - ls -R
     - mkdir -p /opt/flask_app
-    - cp -a  /opt/flask_app
+    - cp -R templates /opt/flask_app
+    - cp -R static /opt/flask_app
+    - cp -R app.py /opt/flask_app
     - ls -R
     - pip install flask
     - pip install urllib2
