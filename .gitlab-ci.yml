@@ -1,27 +1,40 @@
-before_script:
-  - echo "Before script"
-  - echo $CI_BUILD_REF
-  - echo $CI_PROJECT_DIR
-  - echo $CI_COMMIT_TAG
+image: docker:latest
+
+variables:
+  DOCKER_REGISTRY: "pocdv01bvla:5001"
 
 stages:
-  - start
+  - build
+  - tag
+  - push
 
-start-job:
-  stage: start
-  image: docker.io/ubuntu:latest
+build-job:
+  stage: build
   script:
-    - echo "Starting flask app"
-    - pwd
-    - ls -R
-    - mkdir -p /opt/flask_app
-    - cp -R templates /opt/flask_app
-    - cp -R static /opt/flask_app
-    - cp -R app.py /opt/flask_app
-    - ls -R
-    - cd /opt/flask_app
-    - export FLASK_APP=app.py
-    - flask run
-    
+    - docker info
+    - docker build -t healthnow/test-automation-portal:$CI_BUILD_REF .
+  only:
+    - master
+  tags:
+    - docker-linux
+
+tag-job:
+  stage: tag
+  script:
+    - docker images
+    - docker tag healthnow/test-automation-portal:$CI_BUILD_REF  $DOCKER_REGISTRY/healthnow/test-automation-portal:$CI_BUILD_REF 
+    - docker images
+  only:
+    - master
+  tags:
+    - docker-linux
+
+push-job:
+  stage: push
+  script:
+    - docker images
+    - docker push $DOCKER_REGISTRY/healthnow/test-automation-portal:$CI_BUILD_REF 
+  only:
+    - master
   tags:
     - docker-linux
