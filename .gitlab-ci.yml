@@ -2,6 +2,7 @@ image: docker:latest
 
 variables:
   DOCKER_REGISTRY: "pocdv01bvla:5001"
+  VERSION_NUMBER: "0.1.0"
 
 stages:
   - build
@@ -12,7 +13,7 @@ build-job:
   stage: build
   script:
     - docker info
-    - docker build -t healthnow/test-automation-portal .
+    - docker build -t healthnow/test-automation-portal:$VERSION_NUMBER .
   only:
     - master
   tags:
@@ -22,7 +23,7 @@ tag-job:
   stage: tag
   script:
     - docker images
-    - docker tag healthnow/test-automation-portal  $DOCKER_REGISTRY/healthnow/test-automation-portal 
+    - docker tag healthnow/test-automation-portal:$VERSION_NUMBER  $DOCKER_REGISTRY/healthnow/test-automation-portal:$VERSION_NUMBER 
     - docker images
   only:
     - master
@@ -33,7 +34,7 @@ push-job:
   stage: push
   script:
     - docker images
-    - docker push $DOCKER_REGISTRY/healthnow/test-automation-portal
+    - docker push $DOCKER_REGISTRY/healthnow/test-automation-portal:$VERSION_NUMBER
   only:
     - master
   tags:
