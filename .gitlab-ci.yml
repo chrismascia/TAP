@@ -5,10 +5,10 @@ before_script:
   - echo $CI_COMMIT_TAG
 
 stages:
-  - start-flask-app
+  - start
 
-start-flasck-app-job:
-  stage: start-flask-app
+start-job:
+  stage: start
   image: jcdemo/flaskapp
   script:
     - echo "Starting flask app"
@@ -23,7 +23,7 @@ start-flasck-app-job:
     - cd /src
     - flask stop
     - export FLASK_APP=app.py
-    - flask run
+    #- flask run
     
   tags:
     - docker-linux
