@@ -10,3 +10,11 @@
 .view-results-link{
     font-size: 8px;
 }
+
+.navbar .navbar-brand img {
+  height: 50px;
+}
+
+.navbar .no-top-padding{
+  padding-top: 0px;
+}
